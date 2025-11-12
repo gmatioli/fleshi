@@ -2,9 +2,15 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Fléshi</title>
+    <title>
+        {% block title %}
+        Fléshi - Página Inicial
+        {% endblock %}
+    </title>
 </head>
+{% block body %}
 <body>
-    <h1>Fléshi - Página Inicial</h1>
+    <h1>Fléshi</h1>
 </body>
+{% endblock%}
 </html>
