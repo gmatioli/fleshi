@@ -5,7 +5,6 @@ from datetime import  datetime
 from appfleshi import database, login_manager
 from flask_login import UserMixin
 
-#add o userMixin para saber q eh daq q vem os logins
 class User(database.Model, UserMixin):
   id = database.Column(database.Integer, primary_key=True)
   username = database.Column(database.String(20), unique=True, nullable=False)
@@ -13,8 +12,6 @@ class User(database.Model, UserMixin):
   password = database.Column(database.String(60), nullable=False)
   photos = database.relationship('Photo', backref='user', lazy=True)
 
-#função p carregar o user (pega pelo id)
-#sempre q altera algo no models roda o create_database p atualizar
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
