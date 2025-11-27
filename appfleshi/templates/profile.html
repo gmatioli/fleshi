@@ -9,5 +9,11 @@
         <h1>Perfil do usuário: {{ user.username }}</h1>
 
         <a href="{{ url_for('homepage') }}">Sair</a>
+
+        <img src="{{ url_for('static', filename='posts_photos/default.png') }}" alt="alt">
+
+        {% for photo in user.photos %}
+
+        {% endfor %}
     </body>
 {% endblock %}
