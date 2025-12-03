@@ -1,10 +1,11 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, FileField
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError, Length
 from appfleshi.models import User
 
-from appfleshi.models import User
-
+class PhotoForm(FlaskForm):
+    photo = FileField('Foto', validators=[DataRequired()])
+    submit = SubmitField('Postar')
 
 class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
