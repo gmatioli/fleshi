@@ -12,6 +12,12 @@ class LoginForm(FlaskForm):
     password = PasswordField('Senha', validators=[DataRequired()])
     submit = SubmitField('Login')
 
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if not user:
+            return ValidationError("Usuário não encontrado. Crie uma conta!")
+        return None
+
 class RegisterForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     username = StringField('Nome de Usuário', validators=[DataRequired(), Length(min=2, max=20)])
@@ -22,6 +28,12 @@ class RegisterForm(FlaskForm):
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user:
-            return ValidationError("Email já cadastrado. Faça Login!")
+            raise ValidationError("Email já cadastrado. Faça Login!")
+        return None
+
+    def validate_username(self, username):
+        user = User.query.filter_by(username=username.data).first()
+        if user:
+            raise ValidationError("Nome de usuário já cadastrado. Use outro nome ou faça login!")
         return None
 
